@@ -81,7 +81,7 @@ top_tags as (
     LIMIT 10
 ),
 	
-artist_tag_listners as (
+artist_top_tag_listners as (
     SELECT
         tag
         , artist
@@ -101,7 +101,7 @@ FROM ( -- top_listners_window
         , artist
         , listners
         , row_number() OVER (PARTITION BY tag ORDER BY listners DESC) AS r_n
-    FROM artist_tag_listners
+    FROM artist_top_tag_listners
 ) as top_listners_window
 WHERE r_n == 1
 ORDER BY listners DESC
