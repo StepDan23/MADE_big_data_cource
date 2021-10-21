@@ -74,26 +74,17 @@ WITH artist_tag_listners as (
 top_tags as (
     SELECT 
         tag
-        , SUM(listners) as cnt
+        , COUNT(*) as cnt
     FROM artist_tag_listners
     GROUP BY tag
     ORDER BY cnt DESC
     LIMIT 10
-),
-	
-artist_top_tag_listners as (
-    SELECT
-        tag
-        , artist
-        , SUM(listners) as listners
-    FROM artist_tag_listners
-    WHERE tag IN (SELECT tag FROM top_tags)
-    GROUP BY artist, tag
 )
+	
 
 SELECT
     artist
-    , SUM(listners) as listners
+    , MAX(listners) AS listners
 FROM artist_tag_listners
 WHERE tag IN (SELECT tag FROM top_tags)
 GROUP BY artist
@@ -103,17 +94,16 @@ LIMIT 10;
 
 | id | artist | listners |
 | --- | --- | --- |
-| 1 | Phoenix | 227399088 |
-| 2 | Chris Brown | 78745710 |
-| 3 | Passenger | 58496571 |
-| 4 | Kanye West | 43905020 |
-| 5 | Coldplay | 43052536 |
-| 6 | Red Hot Chili Peppers | 41587515 |
-| 7 | Feist | 41301036 |
-| 8 | Linkin Park | 39783900 |
-| 9 | Plan B | 38552031 |
-| 10 | Radiohead | 37860224 |
-
+| 1 | Coldplay | 5381567 |
+| 2 | Radiohead | 4732528 |
+| 3 | Red Hot Chili Peppers | 4620835 |
+| 4 | Rihanna | 4558193 |
+| 5 | Eminem | 4517997 |
+| 6 | The Killers | 4428868 |
+| 7 | Kanye West | 4390502 |
+| 8 | Nirvana | 4272894 |
+| 9 | Muse | 4089612 |
+| 10 | Queen | 4023379 |
 ____________________
 
 Топ 3 исполнителя от топ 10 стран по прослушиваниям
