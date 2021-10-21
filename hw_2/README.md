@@ -106,7 +106,7 @@ LIMIT 10;
 | 10 | Queen | 4023379 |
 ____________________
 
-Топ 3 исполнителя от топ 10 стран по прослушиваниям
+Топ 3 исполнителя от топ 20 стран по прослушиваниям
 
 ```sql
 USE default;
@@ -115,7 +115,7 @@ WITH artist_country_listners as (
     SELECT 
         trim(country_dirty) as country
         , artist_lastfm as artist
-        , SUM(listeners_lastfm) as listners
+        , MAX(listeners_lastfm) as listners
     FROM hue__tmp_artists
             LATERAL VIEW explode(SPLIT(country_lastfm, ';')) hue__tmp_artists AS country_dirty
     GROUP BY country_dirty, artist_lastfm
@@ -129,14 +129,14 @@ top_countries as (
     WHERE country != ''
     GROUP BY country
     ORDER BY cnt DESC
-    LIMIT 10
+    LIMIT 20
 ),
 	
 artist_listners as (
     SELECT
         artist
         , country
-        , SUM(listners) as listners
+        , MAX(listners) as listners
     FROM artist_country_listners
     WHERE country IN (SELECT country FROM top_countries)
     GROUP BY artist, country
@@ -160,33 +160,63 @@ ORDER BY country, listners DESC
  
 | id | country | artist | listners |
 | --- | --- | --- | --- |
-| 1 | Australia | Jet | 5262465 |
-| 2 | Australia | Eden | 3284292 |
-| 3 | Australia | Odyssey | 3124720 |
-| 4 | Canada | Feist | 5900148 |
-| 5 | Canada | Drake | 3379644 |
-| 6 | Canada | Eden | 3284292 |
-| 7 | France | Phoenix	 | 8424886 |
-| 8 | France | Sebastian | 4885461 |
-| 9 | France | Daft Punk | 3782404 |
-| 10 | Germany | Plan B | 5507433 |
-| 11 | Germany | Poison | 3840970 |
-| 12 | Germany | Brainstorm | 3345252 |
-| 13 | Japan | Mono | 4693564 |
-| 14 | Japan | Ghost | 4572763 |
-| 15 | Japan | Eve | 3562608 |
-| 16 | Russia | Brainstorm | 3345252 |
-| 17 | Russia | Eden | 3284292 |
-| 18 | Russia | Max | 1960690 |
-| 19 | Spain | Lena | 3046043 |
-| 20 | Spain | Shakira | 2346168 |
-| 21 | Spain | Nelly Furtado | 2258851 |
-| 22 | Sweden | Passenger | 6499619 |
-| 23 | Sweden | Ghost | 4572763 |
-| 24 | Sweden | Odyssey | 3124720 |
-| 25 | United Kingdom | Passenger | 6499619 |
-| 26 | United Kingdom | Plan B | 5507433 |
-| 27 | United Kingdom | Coldplay | 5381567 |
-| 28 | United States | Chris Brown | 3124285 |
-| 29 | United States | John Williams | 9627944 |
-| 30 | United States | Passenger | 6499619 |
+| 1  | Australia | AC/DC | 2691018 |
+| 2 | Australia | Sia | 2124548 |
+| 3 | Australia | Kylie Minogue | 1951310 |
+| 4 | Brazil | Colbie Caillat | 1415771 |
+| 5 | Brazil | Sepultura | 886301 |
+| 6 | Brazil | Cansei de Ser Sexy | 868761 |
+| 7 | Canada | Drake | 3379644 |
+| 8 | Canada | Nickelback | 2832931 |
+| 9 | Canada | Avril Lavigne | 2627363 |
+| 10 | Finland | Nightwish | 1360111 |
+| 11 | Finland | Apocalyptica | 1219619 |
+| 12 | Finland | Him | 1043930 |
+| 13 | France | Daft Punk | 3782404 |
+| 14 | France | David Guetta | 2782756 |
+| 15 | France | Air | 2155461 |
+| 16 | Georgia | R.E.M. | 2886482 |
+| 17 | Georgia | OutKast | 2508114 |
+| 18 | Georgia | T.I. | 2422414 |
+| 19 | Germany | Ludwig van Beethoven | 1836822 |
+| 20 | Germany | Rammstein | 1809518 |
+| 21 | Germany | Scorpions | 1652144 |
+| 22 | Ireland | U2 | 3487345 |
+| 23 | Ireland | Snow Patrol | 2982390 |
+| 24 | Ireland | The Cranberries | 2276320 |
+| 25 | Italy | Dean Martin | 1271988 |
+| 26 | Italy | Benny Benassi | 1150247 |
+| 27 | Italy | Antonio Vivaldi | 1133085 |
+| 28 | Jamaica | Bob Marley | 2004655 |
+| 29 | Jamaica | Bob Marley & The Wailers | 1921015 |
+| 30 | Jamaica | Sean Paul | 1390177 |
+| 31 | Japan | Far East Movement | 975724 |
+| 32 | Japan | Blonde Redhead | 812628 |
+| 33 | Japan | Bow Wow | 794885 |
+| 34 | Netherlands | Armin van Buuren | 1111815 |
+| 35 | Netherlands | Martin Garrix | 726254 |
+| 36 | Netherlands | Armand van Helden | 609176 |
+| 37 | Norway | Röyksopp | 1995533 |
+| 38 | Norway | Justin Bieber | 1628031 |
+| 39 | Norway | a-ha | 1595929 |
+| 40 | Poland | Frédéric Chopin | 1238360 |
+| 41 | Poland | Destroyer | 507089 |
+| 42 | Poland | Behemoth | 402347 |
+| 43 | Russia | Regina Spektor | 1836766 |
+| 44 | Russia | Pyotr Ilyich Tchaikovsky | 990022 |
+| 45 | Russia | t.A.T.u. | 926338 |
+| 46 | Scotland | Franz Ferdinand | 3203026 |
+| 47 | Scotland | Snow Patrol | 2982390 |
+| 48 | Scotland | Calvin Harris | 2195535 |
+| 49 | Spain | Shakira | 2346168 |
+| 50 | Spain | Nelly Furtado | 2258851 |
+| 51 | Spain | Jennifer Lopez | 2099109 |
+| 52 | Sweden | The Cardigans | 1671502 |
+| 53 | Sweden | ABBA | 1659292 |
+| 54 | Sweden | José González | 1629952 |
+| 55 | United Kingdom | Coldplay | 5381567 |
+| 56 | United Kingdom | Radiohead | 4732528 |
+| 57 | United Kingdom | Muse | 4089612 |
+| 58 | United States | Red Hot Chili Peppers | 4620835 |
+| 59 | United States | Rihanna | 4558193 |
+| 60 | United States | Eminem | 4517997 |
