@@ -13,7 +13,7 @@ Building with sbt running in IDEA
 * Сджойнить две полученные таблички и посчитать Tf-Idf (только для слов из предыдущего пункта)
 * Запайвотить табличку
 
-####Results:
+#### Results:
 
 | id| area|arrived| away| bar|bathroom|beach|beautiful|  bed| beds| best|better|  big| bit|booked|breakfast|buffet|check| city|clean|close|comfortable|  day|days|definitely| desk|  did|excellent|experience|fantastic|floor| food| free|friendly|going| good|  got|great|helpful|hotel|hotels| just|large| like|little|lobby|location| lot|loved|lovely| make|minutes|morning|need| new| nice|night|nights|   no|  not|   nt|people|perfect|place|pool|price|problem|quiet|quite|really|recommend|resort|restaurant|restaurants|reviews|right| room|rooms| say|service|shower|small|staff| stay|stayed|street| sure|think| time|times| took| trip|  use| view| walk|walking|want|water|  way| went|wonderful|
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
